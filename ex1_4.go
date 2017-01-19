@@ -3,29 +3,42 @@ package main
 import (
 	. "fmt"
 	"runtime"
-	"time"
+	//"time"
 )
 
 var i int = 0
 
-func someGoroutine1() {
-	for j := 0; j < 1000000; j++ {
+func someGoroutine1(c chan int, done chan bool) {
+	for j := 0; j < 999999; j++ {
+		i = <-c
 		i++
+		c <- i
 	}
+	done <- true
 }
 
-func someGoroutine2() {
+func someGoroutine2(c chan int, done chan bool) {
 	for k := 0; k < 1000000; k++ {
+		i = <-c
 		i--
+		c <- i
 	}
+	done <- true
 }
 
 func main() {
+
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
-	go someGoroutine1()
-	go someGoroutine2()
+	c := make(chan int, 1)
+	done := make(chan bool, 2)
+	c <- i
 
-	time.Sleep(100 * time.Millisecond)
+	go someGoroutine1(c, done)
+	go someGoroutine2(c, done)
+
+	<-done
+	<-done
+	i = <-c
 	Println("tallet er: ", i)
 }
