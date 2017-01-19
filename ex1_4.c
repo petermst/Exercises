@@ -4,6 +4,7 @@
 #include<unistd.h>
 
 static int i = 0;
+
 pthread_mutex_t lock;
 
 void* someThreadFunction1(){
