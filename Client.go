@@ -35,7 +35,7 @@ func main() {
 
 		time.Sleep(time.Second)
 
-		_, err := conn.Write([]byte("HEIEH\x00"))
+		_, err := conn.Write([]byte("HEIEH"))
 
 		checkError(err)
 
