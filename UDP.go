@@ -17,8 +17,8 @@ func checkError(err error) {
 func main() {
 	buffer := make([]byte, 1024)
 	ListenerAddress := ":20008"
-	SenderAddress := "129.241.187.43:20008"
-
+	SenderAddress := ":20008"
+//129.241.187.43
 	address, _ := net.ResolveUDPAddr("udp", ListenerAddress)
 	listener, _ := net.ListenUDP("udp", address)
 
@@ -35,7 +35,7 @@ func main() {
 
 		time.Sleep(time.Second)
 
-		_, err := conn.Write([]byte("HEIEH"))
+		_, err := conn.Write([]byte("Trololol"))
 
 		checkError(err)
 
