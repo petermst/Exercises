@@ -16,9 +16,9 @@ func checkError(err error) {
 
 func main() {
 	buffer := make([]byte, 1024)
-	ListenerAddress := ":20008"
-	SenderAddress := ":20008"
-//129.241.187.43
+	ListenerAddress := "127.0.0.1:30008"
+	SenderAddress := ":30008"
+	//129.241.187.43
 	address, _ := net.ResolveUDPAddr("udp", ListenerAddress)
 	listener, _ := net.ListenUDP("udp", address)
 
