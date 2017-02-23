@@ -18,28 +18,7 @@ func checkError(err error) {
 
 func main() {
 
-	buffer := make([]byte, 1024)
-	ListenerAddress := ":30008"
-
-	address, _ := net.ResolveUDPAddr("udp", ListenerAddress)
-	listener, _ := net.ListenUDP("udp", address)
-
-	fmt.Printf("%s\n", listener.LocalAddr())
-
-	time.Sleep(time.Second)
-
-	listener.SetReadDeadline(time.Now().Add(2 * time.Second))
-	n, _, _ := listener.ReadFromUDP(buffer)
-
-	last_value := 0
-
-	err := listener.Close()
-
-	checkError(err)
-
-	if n != 0 {
-		last_value = backup()
-	}
+	last_value := backup()
 
 	primary(last_value)
 
